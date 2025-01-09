@@ -8,6 +8,10 @@ function! FetchSSHKey(string)
   let parts = split(content)
   if len(parts) >= 2
     let key = parts[1]
+    if key =~? '^\s*HTML\s*$'
+        echoerr "Fehler: Username '" . a:string . "' ist vermutlich nicht korrekt."
+        return
+    endif
     execute "normal! a" . key
   else
     echoerr "Ungültiges Format"
